@@ -1,0 +1,24 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.vscode/
+catboost_info/
+
+# Competition-private or large local data
+train.csv
+train_temiz.csv
+train_ULTRA_temiz.csv
+test_x.csv
+test_temiz.csv
+test_ULTRA_temiz.csv
+
+# Local scratch / OS
+Thumbs.db
+Desktop.ini
+

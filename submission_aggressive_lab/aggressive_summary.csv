@@ -1,0 +1,7 @@
+file,kind,mean,std,pseudo_frac,pseudo_weight
+submission_STAGE2_SAFE_PLUS.csv,stage2_blend,5.936982,1.867316,,
+submission_STAGE2_DIVERSE_PLUS.csv,stage2_blend,5.937356,1.865817,,
+submission_STAGE2_RANK_MIX.csv,stage2_blend,5.937439,1.865941,,
+submission_PSEUDO_TOP15_W035.csv,pseudo_label,5.964028,1.872371,0.15,0.35
+submission_PSEUDO_TOP30_W025.csv,pseudo_label,5.959025,1.871496,0.3,0.25
+submission_PSEUDO_ALL_SOFT.csv,pseudo_label,5.95542,1.87324,1.0,0.12

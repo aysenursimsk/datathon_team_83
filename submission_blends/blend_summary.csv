@@ -1,0 +1,6 @@
+file,mean,std,min,max
+blend_safe_anchor.csv,5.937777,1.866129,0.441352,9.870704
+blend_diverse_anchor.csv,5.937335,1.864788,0.413344,9.881479
+blend_wide_diversity.csv,5.924408,1.873112,0.371823,9.892254
+blend_trimmed_mean.csv,5.938013,1.863941,0.307805,9.913803
+blend_rank_rescaled.csv,5.937224,1.863966,0.751801,9.651515
