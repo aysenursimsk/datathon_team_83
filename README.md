@@ -10,6 +10,32 @@ Bu çalışma klasik bir tabular regression yarışması olarak başlamadı. Ço
 - external proxy yaklaşımı
 - en sonunda yarışmayı gerçek anlamda kıran external nearest-neighbor retrieval hattı
 
+## Hızlı Bakış
+
+- Problem tipi: sentetik tabular regresyon
+- Hedef değişken: `bilissel_performans_skoru`
+- Ana metrik: `RMSE`
+- Güvenli ağaç tabanlı baz: yaklaşık `1.22`
+- Güçlü supervised / proxy hattı: yaklaşık `1.20`
+- Yarışmayı kıran final yaklaşım: `external 1-NN retrieval + hafif Ridge kalibrasyonu`
+- En dikkat çekici public leaderboard seviyesi: yaklaşık `0.15592`
+
+Bu repo yalnızca final kodu değil, karar verme sürecini de saklar. Yani burada hem başarılı yöntemler hem de bilinçli olarak elenen yollar korunmuştur.
+
+## Skor Özeti
+
+| Aşama | Ana yaklaşım | Yaklaşık skor | Yorum |
+| --- | --- | ---: | --- |
+| Güvenli baz | CatBoost + temel feature engineering | `1.22` bandı | CV ve LB en tutarlı başlangıç çizgisi |
+| Gelişmiş supervised hat | Cluster feature'lar + CatBoost ağırlıklı blend | `1.20` bandı | Ek modeller sınırlı yeni sinyal üretti |
+| External proxy dönemi | `sleep_health_dataset.csv` üzerinden proxy feature üretimi | `1.20` altına yaklaşan güvenli iyileşme | Dış verinin gerçekten değerli olduğu burada netleşti |
+| Final kırılma noktası | One-hot + Manhattan `1-NN` external retrieval | train tarafında çok düşük hata | Generator mantığını yakalama ihtimali çok yükseldi |
+| Final submission | `1-NN + Ridge` kalibrasyonu | public LB yaklaşık `0.15592` | Yarışmayı asıl sıçratan çözüm |
+
+## English Abstract
+
+This repository documents Team 83's full modeling journey for the YZTA 2026 Datathon. The competition started as a synthetic tabular regression problem, but our final breakthrough did not come from standard tree ensembles alone. After strong CatBoost baselines, multiple stacking attempts, and external proxy features, the decisive gain came from aligning the provided external sleep dataset with the competition feature space and transferring scores through nearest-neighbor retrieval. In short, the project evolved from conventional supervised learning into a retrieval-driven reverse-engineering pipeline for the hidden synthetic data generator.
+
 ## 1. Yarışma Özeti
 
 ### Problem tanımı
@@ -222,6 +248,29 @@ Buradan üretilen nihai dosyalar:
 ## 4. Repo Yapısı
 
 Bu repo bilerek “çok temizlenmiş tek final kod” mantığıyla değil, yarışma yolculuğunu taşıyacak şekilde düzenlendi.
+
+### Hızlı repo haritası
+
+```text
+.
+├── README.md
+├── requirements.txt
+├── sleep_health_dataset.csv
+├── hedef_1_1_pro.py
+├── external_1nn_retrieval.py
+├── submission_blend_lab.py
+├── aggressive_submission_lab.py
+├── submission_*.csv
+├── submission_blends/
+├── submission_aggressive_lab/
+├── data/
+└── deney / analiz scriptleri
+```
+
+Bu yapı özellikle iki şeyi görünür kılmak için korundu:
+
+- nihai olarak işe yarayan ana hatlar
+- o sonuca giderken denenmiş alternatif araştırma patikaları
 
 ### Ana çalışma dosyaları
 
